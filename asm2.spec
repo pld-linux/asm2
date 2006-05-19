@@ -12,7 +12,7 @@ Source1:	http://asm.objectweb.org/current/asm-eng.pdf
 Source2:	http://asm.objectweb.org/doc/faq.html
 # Source2-md5:	556c0df057bced41517491784d556acc
 URL:		http://asm.objectweb.org/
-BuildRequires:	jakarta-ant
+BuildRequires:	ant
 BuildRequires:	objectweb-anttask
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
