@@ -1,5 +1,5 @@
 Summary:	A code manipulation tool to implement adaptable systems
-Summary(pl.UTF-8):   Narzędzie do obróbki kodu do implementowania systemów adaptacyjnych
+Summary(pl.UTF-8):	Narzędzie do obróbki kodu do implementowania systemów adaptacyjnych
 Name:		asm2
 Version:	2.1
 Release:	0.1
@@ -26,7 +26,7 @@ adaptacyjnych.
 
 %package javadoc
 Summary:	Javadoc for %{name}
-Summary(pl.UTF-8):   Dokumentacja javadoc dla pakietu %{name}
+Summary(pl.UTF-8):	Dokumentacja javadoc dla pakietu %{name}
 Group:		Documentation
 
 %description javadoc
