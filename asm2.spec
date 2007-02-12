@@ -1,5 +1,5 @@
 Summary:	A code manipulation tool to implement adaptable systems
-Summary(pl):	Narz阣zie do obr骲ki kodu do implementowania system體 adaptacyjnych
+Summary(pl.UTF-8):   Narz臋dzie do obr贸bki kodu do implementowania system贸w adaptacyjnych
 Name:		asm2
 Version:	2.1
 Release:	0.1
@@ -20,19 +20,19 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 ASM is a code manipulation tool to implement adaptable systems.
 
-%description -l pl
-ASM to narz阣zie do obr骲ki kodu do implementowania system體
+%description -l pl.UTF-8
+ASM to narz臋dzie do obr贸bki kodu do implementowania system贸w
 adaptacyjnych.
 
 %package javadoc
 Summary:	Javadoc for %{name}
-Summary(pl):	Dokumentacja javadoc dla pakietu %{name}
+Summary(pl.UTF-8):   Dokumentacja javadoc dla pakietu %{name}
 Group:		Documentation
 
 %description javadoc
 Javadoc for %{name}.
 
-%description javadoc -l pl
+%description javadoc -l pl.UTF-8
 Dokumentacja javadoc dla pakietu %{name}.
 
 %prep
