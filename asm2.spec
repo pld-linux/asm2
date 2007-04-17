@@ -58,8 +58,9 @@ install -d $RPM_BUILD_ROOT%{_javadir}/%{name}
 
 for a in output/dist/lib/*.jar; do
 	jar=${a##*/}
-	cp -a output/dist/lib/$jar $RPM_BUILD_ROOT%{_javadir}/$jar
-	ln -s $jar $RPM_BUILD_ROOT%{_javadir}/${jar%%-%{version}.jar}.jar
+	jar2=asm2-${jar#asm-}
+	cp -a output/dist/lib/$jar $RPM_BUILD_ROOT%{_javadir}/$jar2
+	ln -s $jar2 $RPM_BUILD_ROOT%{_javadir}/${jar2%%-%{version}.jar}.jar
 done
 
 # javadoc
