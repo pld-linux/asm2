@@ -1,3 +1,4 @@
+%include	/usr/lib/rpm/macros.java
 Summary:	A code manipulation tool to implement adaptable systems
 Summary(pl.UTF-8):	Narzędzie do obróbki kodu do implementowania systemów adaptacyjnych
 Name:		asm2
@@ -13,7 +14,9 @@ Source2:	http://asm.objectweb.org/doc/faq.html
 # Source2-md5:	556c0df057bced41517491784d556acc
 URL:		http://asm.objectweb.org/
 BuildRequires:	ant
+BuildRequires:	jpackage-utils
 BuildRequires:	objectweb-anttask
+BuildRequires:	rpmbuild(macros) >= 1.300
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -28,6 +31,7 @@ adaptacyjnych.
 Summary:	Javadoc for %{name}
 Summary(pl.UTF-8):	Dokumentacja javadoc dla pakietu %{name}
 Group:		Documentation
+Requires:	jpackage-utils
 
 %description javadoc
 Javadoc for %{name}.
@@ -37,12 +41,14 @@ Dokumentacja javadoc dla pakietu %{name}.
 
 %prep
 %setup -q -n asm-%{version}
-find . -name "*.jar" -exec rm -f {} \;
+find -name '*.jar' | xargs rm -vf
 install -m 644 %{SOURCE1} .
 install -m 644 %{SOURCE2} .
 
 %build
-ant -Dobjectweb.ant.tasks.path=$(build-classpath objectweb-anttask) jar jdoc
+export LC_ALL=en_US # source not in ASCII
+%ant jar jdoc \
+	-Dobjectweb.ant.tasks.path=$(build-classpath objectweb-anttask)
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -50,43 +56,29 @@ rm -rf $RPM_BUILD_ROOT
 # jars
 install -d $RPM_BUILD_ROOT%{_javadir}/%{name}
 
-for jar in output/dist/lib/*.jar; do
-	newjar=$(echo $jar | sed /asm-/asm2-/)
-	install ${jar} $RPM_BUILD_ROOT%{_javadir}/%{name}/`basename ${newjar}`
+for a in output/dist/lib/*.jar; do
+	jar=${a##*/}
+	cp -a output/dist/lib/$jar $RPM_BUILD_ROOT%{_javadir}/$jar
+	ln -s $jar $RPM_BUILD_ROOT%{_javadir}/${jar%%-%{version}.jar}.jar
 done
-
-cd $RPM_BUILD_ROOT%{_javadir}/%{name}
-for jar in *-%{version}*; do
-	ln -sf ${jar} $(echo $jar | sed -e s/-%{version}//)
-done
-cd -
 
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -pr output/dist/doc/javadoc/user/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cd $RPM_BUILD_ROOT%{_javadocdir}
-ln -sf %{name}-%{version} %{name}
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post javadoc
-rm -f %{_javadocdir}/%{name}
-ln -s %{name}-%{version} %{_javadocdir}/%{name}
-
-%postun javadoc
-if [ $1 -eq 0 ]; then
-	rm -f %{_javadocdir}/%{name}
-fi
+ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
 %doc README.txt faq.html asm-eng.pdf
-%dir %{_javadir}/%{name}
-%{_javadir}/%{name}/*.jar
+%{_javadir}/*.jar
 
 %files javadoc
 %defattr(644,root,root,755)
-%dir %{_javadocdir}/%{name}-%{version}
-%{_javadocdir}/%{name}-%{version}/*
-%ghost %dir %{_javadocdir}/%{name}
+%{_javadocdir}/%{name}-%{version}
+%ghost %{_javadocdir}/%{name}
