@@ -11,7 +11,7 @@ Source0:	http://download.forge.objectweb.org/asm/asm-%{version}.tar.gz
 Source1:	http://asm.objectweb.org/current/asm-eng.pdf
 # Source1-md5:	5f17bfac3563feb108793575f74ce27c
 Source2:	http://asm.objectweb.org/doc/faq.html
-# Source2-md5:	c47c4b8f03188df7da74ba09801127e8
+# Source2-md5:	cca9b825cf4398addb909bd1fa217a70
 URL:		http://asm.objectweb.org/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
