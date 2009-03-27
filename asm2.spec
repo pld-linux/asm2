@@ -3,7 +3,7 @@ Summary:	A code manipulation tool to implement adaptable systems
 Summary(pl.UTF-8):	Narzędzie do obróbki kodu do implementowania systemów adaptacyjnych
 Name:		asm2
 Version:	2.2.3
-Release:	0.1
+Release:	1
 License:	BSD-style
 Group:		Development/Languages/Java
 Source0:	http://download.forge.objectweb.org/asm/asm-%{version}.tar.gz
