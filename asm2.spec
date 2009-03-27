@@ -47,7 +47,7 @@ find -name '*.jar' | xargs rm -vf
 install -m 644 %{SOURCE1} .
 install -m 644 %{SOURCE2} .
 
-mkdir test/lib
+install -d test/lib
 
 %build
 export LC_ALL=en_US # source not in ASCII
