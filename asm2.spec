@@ -1,4 +1,3 @@
-%include	/usr/lib/rpm/macros.java
 Summary:	A code manipulation tool to implement adaptable systems
 Summary(pl.UTF-8):	Narzędzie do obróbki kodu do implementowania systemów adaptacyjnych
 Name:		asm2
